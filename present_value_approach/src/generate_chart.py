@@ -10,6 +10,8 @@ from pathlib import Path
 from settings import config
 import matplotlib.pyplot as plt
 
+import plotly.graph_objects as go
+
 
 OUTPUT_DIR = config("OUTPUT_DIR")
 DATA_DIR = config("DATA_DIR")
@@ -28,72 +30,62 @@ def load_r30_day_T_bill(data_dir=DATA_DIR):
     return df
 
 
-def generate_chart(stock_market_return, T_bill):
-    # --------------------
-    # Sanity checks
-    # --------------------
-    required_cols = {'date', 'vwretd', 'vwretx'}
-    assert required_cols.issubset(stock_market_return.columns), f"Missing columns: {required_cols - set(stock_market_return.columns)}"
+def generate_chart_html(stock_market_return, T_bill):
+    required_cols = {"date", "vwretd", "vwretx"}
+    assert required_cols.issubset(stock_market_return.columns), \
+        f"Missing columns: {required_cols - set(stock_market_return.columns)}"
 
-    # --------------------
-    # Collapse stock-level data to market-level
-    # --------------------
     market = (
-        stock_market_return[['date', 'vwretd', 'vwretx']]
-        .drop_duplicates(subset=['date'])
-        .sort_values('date')
+        stock_market_return[["date", "vwretd", "vwretx"]]
+        .drop_duplicates(subset=["date"])
+        .sort_values("date")
     )
 
-    # --------------------
-    # Merge risk-free rate
-    # --------------------
-    market = market.merge(T_bill[['date', 't30ret']], on='date', how='left')
+    market = market.merge(T_bill[["date", "t30ret"]], on="date", how="left")
+    market["excess_mkt"] = market["vwretd"] - market["t30ret"]
 
-    # --------------------
-    # Plot 1: Market returns
-    # --------------------
-    plt.figure()
-    plt.plot(market['date'], market['vwretd'], label='VW Market Return (with distributions)')
-    plt.plot(market['date'], market['vwretx'], label='VW Market Return (ex distributions)')
-    plt.xlabel('Date')
-    plt.ylabel('Monthly Return')
-    plt.title('CRSP Value-Weighted Market Returns')
-    plt.legend()
-    plt.tight_layout()
-    # Ensure output directory exists
-    Path(OUTPUT_DIR).mkdir(parents=True, exist_ok=True)
+    outdir = Path(OUTPUT_DIR)
+    outdir.mkdir(parents=True, exist_ok=True)
 
-    plt.savefig(Path(OUTPUT_DIR) / "crsp_market_returns.png")
-    plt.close()
+    # ---- Chart 1: market returns (2 lines)
+    fig1 = go.Figure()
+    fig1.add_trace(go.Scatter(x=market["date"], y=market["vwretd"], mode="lines",
+                              name="VW Market Return (with distributions)"))
+    fig1.add_trace(go.Scatter(x=market["date"], y=market["vwretx"], mode="lines",
+                              name="VW Market Return (ex distributions)"))
+    fig1.update_layout(
+        title="CRSP Value-Weighted Market Returns",
+        xaxis_title="Date",
+        yaxis_title="Monthly Return",
+        template="plotly_white",
+    )
+    fig1.write_html(outdir / "crsp_market_returns.html", include_plotlyjs="cdn")
 
-    # --------------------
-    # Plot 2: Risk-free rate
-    # --------------------
-    plt.figure()
-    plt.plot(market['date'], market['t30ret'])
-    plt.xlabel('Date')
-    plt.ylabel('Monthly Risk-Free Rate')
-    plt.title('30-Day Treasury Bill Rate')
-    plt.tight_layout()
+    # ---- Chart 2: risk-free rate
+    fig2 = go.Figure()
+    fig2.add_trace(go.Scatter(x=market["date"], y=market["t30ret"], mode="lines",
+                              name="30D T-bill"))
+    fig2.update_layout(
+        title="30-Day Treasury Bill Rate",
+        xaxis_title="Date",
+        yaxis_title="Monthly Risk-Free Rate",
+        template="plotly_white",
+        showlegend=False,
+    )
+    fig2.write_html(outdir / "crsp_30day_tbill.html", include_plotlyjs="cdn")
 
-    plt.savefig(Path(OUTPUT_DIR) / "crsp_30day_tbill.png")
-    plt.close()
-
-     # --------------------
-    # Plot 3: Excess market returns
-    # --------------------
-
-    market['excess_mkt'] = market['vwretd'] - market['t30ret']
-
-    plt.figure()
-    plt.plot(market['date'], market['excess_mkt'])
-    plt.xlabel('Date')
-    plt.ylabel('Excess Return')
-    plt.title('Excess Market Return')
-    plt.tight_layout()
-
-    plt.savefig(Path(OUTPUT_DIR) / "excess_market_return.png")
-    plt.close()
+    # ---- Chart 3: excess returns
+    fig3 = go.Figure()
+    fig3.add_trace(go.Scatter(x=market["date"], y=market["excess_mkt"], mode="lines",
+                              name="Excess Market Return"))
+    fig3.update_layout(
+        title="Excess Market Return",
+        xaxis_title="Date",
+        yaxis_title="Excess Return",
+        template="plotly_white",
+        showlegend=False,
+    )
+    fig3.write_html(outdir / "excess_market_return.html", include_plotlyjs="cdn")
 
     
 

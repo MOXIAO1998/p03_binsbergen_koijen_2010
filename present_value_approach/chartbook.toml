@@ -57,7 +57,7 @@ date_col = "date"
 chart_name = "CRSP Value-Weighted Market Returns"
 short_description_chart = "Monthly value-weighted market returns with and without distributions from CRSP"
 dataframe_id = "crsp_market_returns"
-path_to_html_chart = "_output/crsp_market_returns.png"
+path_to_html_chart = "_output/crsp_market_returns.html"
 chart_docs_str = "This time-series chart displays the monthly CRSP value-weighted market returns with and without distributions, serving as a sanity check that the CRSP market data was successfully retrieved."
 
 
@@ -65,7 +65,7 @@ chart_docs_str = "This time-series chart displays the monthly CRSP value-weighte
 chart_name = "30-Day Treasury Bill Rate"
 short_description_chart = "Monthly 30-day Treasury bill rate from CRSP"
 dataframe_id = "crsp_30day_tbill"
-path_to_html_chart = "_output/crsp_30day_tbill.png"
+path_to_html_chart = "_output/crsp_30day_tbill.html"
 chart_docs_str = "This chart shows the monthly 30-day Treasury bill rate used as the risk-free return in subsequent asset pricing analysis."
 
 
@@ -74,5 +74,5 @@ chart_docs_str = "This chart shows the monthly 30-day Treasury bill rate used as
 chart_name = "Excess Market Return"
 short_description_chart = "Monthly excess market return computed as vwretd minus the 30-day Treasury bill rate"
 dataframe_id = "crsp_market_returns"
-path_to_html_chart = "_output/excess_market_return.png"
+path_to_html_chart = "_output/excess_market_return.html"
 chart_docs_str = "This figure plots the excess market return, defined as the CRSP value-weighted market return with distributions minus the risk-free rate."
