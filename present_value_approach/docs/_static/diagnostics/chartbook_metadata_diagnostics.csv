@@ -1,7 +1,0 @@
-Name,Metadata Complete,Object Type,Identifier,Pipeline,Missing Fields,Page Link
-Predictive Regressions: A Present-Value Approach,False,pipeline,PR,PR,"build_commands, os_compatibility, git_repo_URL",../index.html
-crsp_market_returns,False,dataframe,crsp_market_returns,PR,"dataframe_name, short_description_df, links_to_data_providers, topic_tags",../dataframes/PR/crsp_market_returns.html
-crsp_30day_tbill,False,dataframe,crsp_30day_tbill,PR,"dataframe_name, short_description_df, links_to_data_providers, topic_tags",../dataframes/PR/crsp_30day_tbill.html
-CRSP Value-Weighted Market Returns,False,chart,crsp_market_returns_ts,PR,"topic_tags, data_frequency, observation_period, lag_in_data_release, data_release_timing, units",../charts/PR.crsp_market_returns_ts.html
-30-Day Treasury Bill Rate,False,chart,crsp_30day_tbill_ts,PR,"topic_tags, data_frequency, observation_period, lag_in_data_release, data_release_timing, units",../charts/PR.crsp_30day_tbill_ts.html
-Excess Market Return,False,chart,excess_market_return_ts,PR,"topic_tags, data_frequency, observation_period, lag_in_data_release, data_release_timing, units",../charts/PR.excess_market_return_ts.html
