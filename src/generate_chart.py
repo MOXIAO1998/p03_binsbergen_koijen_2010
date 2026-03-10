@@ -19,13 +19,13 @@ DATA_DIR = config("DATA_DIR")
 
 
 def load_CRSP_monthly_stock_data(data_dir=DATA_DIR):
-    path = Path(data_dir) / "CRSP_monthly_stock.parquet"
+    path = Path(data_dir) / "CRSP_monthly_stock_to_2007.parquet"
     df = pd.read_parquet(path)
     return df
 
 
 def load_r30_day_T_bill(data_dir=DATA_DIR):
-    path = Path(data_dir) / "CRSP_30_day_T_bill.parquet"
+    path = Path(data_dir) / "CRSP_30_day_T_bill_to_2007.parquet"
     df = pd.read_parquet(path)
     return df
 
@@ -59,7 +59,7 @@ def generate_chart(stock_market_return, T_bill):
         yaxis_title="Monthly Return",
         template="plotly_white",
     )
-    fig1.write_html(outdir / "crsp_market_returns.html", include_plotlyjs="cdn")
+    fig1.write_html(outdir / "crsp_market_returns_to_2007.html", include_plotlyjs="cdn")
 
     # ---- Chart 2: risk-free rate
     fig2 = go.Figure()
@@ -72,7 +72,7 @@ def generate_chart(stock_market_return, T_bill):
         template="plotly_white",
         showlegend=False,
     )
-    fig2.write_html(outdir / "crsp_30day_tbill.html", include_plotlyjs="cdn")
+    fig2.write_html(outdir / "crsp_30day_tbill_to_2007.html", include_plotlyjs="cdn")
 
     # ---- Chart 3: excess returns
     fig3 = go.Figure()
@@ -85,7 +85,7 @@ def generate_chart(stock_market_return, T_bill):
         template="plotly_white",
         showlegend=False,
     )
-    fig3.write_html(outdir / "excess_market_return.html", include_plotlyjs="cdn")
+    fig3.write_html(outdir / "excess_market_return_to_2007.html", include_plotlyjs="cdn")
 
     
 
