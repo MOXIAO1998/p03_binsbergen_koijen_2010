@@ -45,9 +45,9 @@ import pandas as pd
 
 
 def pull_CRSP_monthly_file(
-    start_date="1946-01-01",
-    end_date="2007-12-31",
-    wrds_username=WRDS_USERNAME,
+    start_date,
+    end_date,
+    wrds_username,
 ):
     """
     Pull CRSP value-weighted index returns (VWRETD, VWRETX)
@@ -62,18 +62,33 @@ def pull_CRSP_monthly_file(
         - vwretx
     """
 
-    query = f"""
-        SELECT
-            DISTINCT msf.mthcaldt AS date,
-            msf.vwretd AS vwretd,
-            msf.vwretx AS vwretx
-        FROM crspm.wrds_msfv2_query AS msf
-        
-        WHERE
-            msf.mthcaldt BETWEEN '{start_date}' AND '{end_date}'
-            AND msf.primaryexch IN ('N', 'A', 'Q')
-        ORDER BY msf.mthcaldt
-    """
+    if end_date is None:
+        query = f"""
+            SELECT
+                DISTINCT msf.mthcaldt AS date,
+                msf.vwretd AS vwretd,
+                msf.vwretx AS vwretx
+            FROM crspm.wrds_msfv2_query AS msf
+            
+            WHERE
+                msf.mthcaldt >= '{start_date}'
+                AND msf.primaryexch IN ('N', 'A', 'Q')
+            ORDER BY msf.mthcaldt
+         """
+
+    else:
+        query = f"""
+            SELECT
+                DISTINCT msf.mthcaldt AS date,
+                msf.vwretd AS vwretd,
+                msf.vwretx AS vwretx
+            FROM crspm.wrds_msfv2_query AS msf
+            
+            WHERE
+                msf.mthcaldt BETWEEN '{start_date}' AND '{end_date}'
+                AND msf.primaryexch IN ('N', 'A', 'Q')
+            ORDER BY msf.mthcaldt
+        """
 
     db = wrds.Connection(wrds_username=wrds_username)
     df = db.raw_sql(query, date_cols=["date"])
@@ -97,7 +112,13 @@ def _demo():
 
 if __name__ == "__main__":
     df_msf = pull_CRSP_monthly_file(start_date=START_DATE, end_date=END_DATE, wrds_username=WRDS_USERNAME)
-    path = Path(DATA_DIR) / "CRSP_monthly_stock_to_2007.parquet"
+    path = Path(DATA_DIR) / "CRSP_monthly_stock_44_to_07.parquet"
+    path.parent.mkdir(parents=True, exist_ok=True)
+    df_msf.to_parquet(path)
+
+
+    df_msf = pull_CRSP_monthly_file(start_date=START_DATE, end_date=None, wrds_username=WRDS_USERNAME)
+    path = Path(DATA_DIR) / "CRSP_monthly_stock_44_to_latest.parquet"
     path.parent.mkdir(parents=True, exist_ok=True)
     df_msf.to_parquet(path)
 

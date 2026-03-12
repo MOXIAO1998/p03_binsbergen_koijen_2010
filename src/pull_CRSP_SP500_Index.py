@@ -43,9 +43,9 @@ import pandas as pd
 
 
 def pull_CRSP_SP500_file(
-    start_date="1946-01-01",
-    end_date="2007-12-31",
-    wrds_username=WRDS_USERNAME,
+    start_date,
+    end_date,
+    wrds_username,
 ):
     """
     Pull CRSP Return and Level on SP composite index (sprtrn,spindx)
@@ -57,18 +57,31 @@ def pull_CRSP_SP500_file(
         - vwretd
         - vwretx
     """
+    if end_date is None:
+        query = f"""
+            SELECT
+                DISTINCT sp500.caldt AS date,
+                sp500.sprtrn AS sprtrn,
+                sp500.spindx AS spindx
+            FROM crspm.msp500 AS sp500
+            
+            WHERE
+                sp500.caldt >= '{start_date}'
+            ORDER BY sp500.caldt
+        """
 
-    query = f"""
-        SELECT
-            DISTINCT sp500.caldt AS date,
-            sp500.sprtrn AS sprtrn,
-            sp500.spindx AS spindx
-        FROM crspm.msp500 AS sp500
-        
-        WHERE
-            sp500.caldt BETWEEN '{start_date}' AND '{end_date}'
-        ORDER BY sp500.caldt
-    """
+    else:
+        query = f"""
+            SELECT
+                DISTINCT sp500.caldt AS date,
+                sp500.sprtrn AS sprtrn,
+                sp500.spindx AS spindx
+            FROM crspm.msp500 AS sp500
+            
+            WHERE
+                sp500.caldt BETWEEN '{start_date}' AND '{end_date}'
+            ORDER BY sp500.caldt
+        """
 
     db = wrds.Connection(wrds_username=wrds_username)
     df = db.raw_sql(query, date_cols=["date"])
@@ -92,7 +105,13 @@ def _demo():
 
 if __name__ == "__main__":
     df_msf = pull_CRSP_SP500_file(start_date=START_DATE, end_date=END_DATE, wrds_username=WRDS_USERNAME)
-    path = Path(DATA_DIR) / "CRSP_SP500_to_2007.parquet"
+    path = Path(DATA_DIR) / "CRSP_SP500_44_to_07.parquet"
     path.parent.mkdir(parents=True, exist_ok=True)
     df_msf.to_parquet(path)
+
+    df_msf = pull_CRSP_SP500_file(start_date=START_DATE, end_date=None, wrds_username=WRDS_USERNAME)
+    path = Path(DATA_DIR) / "CRSP_SP500_44_to_latest.parquet"
+    path.parent.mkdir(parents=True, exist_ok=True)
+    df_msf.to_parquet(path)
+
 

@@ -41,9 +41,9 @@ import pandas as pd
 
 
 def pull_30_day_T_bill(
-    start_date="1946-01-01",
-    end_date="2007-12-31",
-    wrds_username=WRDS_USERNAME,
+    start_date,
+    end_date,
+    wrds_username,
 ):
     """
     Pull CRSP 30-day T-bill returns (t30ret)
@@ -55,8 +55,19 @@ def pull_30_day_T_bill(
         - mthcaldt
         - t30ret
     """
-
-    query = f"""
+    if end_date is None:
+        query = f"""
+        SELECT
+           mcti.caldt AS date,
+           mcti.t30ret AS t30ret
+        FROM crspm.mcti AS mcti
+        
+        WHERE
+            mcti.caldt >= '{start_date}'
+        ORDER BY mcti.caldt
+        """
+    else:
+        query = f"""
         SELECT
            mcti.caldt AS date,
            mcti.t30ret AS t30ret
@@ -65,7 +76,7 @@ def pull_30_day_T_bill(
         WHERE
             mcti.caldt BETWEEN '{start_date}' AND '{end_date}'
         ORDER BY mcti.caldt
-    """
+        """
 
     db = wrds.Connection(wrds_username=wrds_username)
     df = db.raw_sql(query, date_cols=["date"])
@@ -84,8 +95,16 @@ def load_CRSP_30_day_T_bill(data_dir=DATA_DIR):
 
 
 if __name__ == "__main__":
+    
+    # data from 1944 to 2007
     df_msf = pull_30_day_T_bill(start_date=START_DATE, end_date=END_DATE, wrds_username=WRDS_USERNAME)
-    path = Path(DATA_DIR) / "CRSP_30_day_T_bill_to_2007.parquet"
+    path = Path(DATA_DIR) / "CRSP_30_day_T_bill_44_to_07.parquet"
+    path.parent.mkdir(parents=True, exist_ok=True)
+    df_msf.to_parquet(path)
+
+    # data from 1944 to latest date
+    df_msf = pull_30_day_T_bill(start_date=START_DATE, end_date=None, wrds_username=WRDS_USERNAME)
+    path = Path(DATA_DIR) / "CRSP_30_day_T_bill_44_to_latest.parquet"
     path.parent.mkdir(parents=True, exist_ok=True)
     df_msf.to_parquet(path)
 
