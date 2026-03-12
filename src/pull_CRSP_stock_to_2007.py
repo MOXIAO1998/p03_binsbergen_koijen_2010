@@ -5,21 +5,22 @@ This module uses the CRSP CIZ format (Flat File Format 2.0), which replaced
 the legacy SIZ format as of January 2025.
 
 Key resources:
- - Data for indices: https://wrds-www.wharton.upenn.edu/data-dictionary/crsp_a_indexes/
+ - Data for indices: https://wrds-www.wharton.upenn.edu/data-dictionary/crsp_m_stock/
  - Tidy Finance guide: https://www.tidy-finance.org/python/wrds-crsp-and-compustat.html
  - CRSP 2.0 Update: https://www.tidy-finance.org/blog/crsp-v2-update/
  - Transition FAQ: https://wrds-www.wharton.upenn.edu/pages/support/manuals-and-overviews/crsp/stocks-and-indices/crsp-stock-and-indexes-version-2/crsp-ciz-faq/
  - Cross-Reference Guide: https://www.crsp.org/wp-content/uploads/guides/CRSP_Cross_Reference_Guide_1.0_to_2.0.pdf
 
 Key changes from SIZ to CIZ format:
- - Monthly stock table: crspm.msf -> crspm.msf_v2
+ - Monthly stock table: crspm.msf -> crspm.wrds_msfv2_query
  - Security info: crspm.msenames -> crspm.stksecurityinfohist
  - Delisting returns are now built into mthret (no separate table needed)
- - Column names: date->mthcaldt, ret->mthret, retx->mthretx, prc->mthprc
+ - Column names: date->mthcaldt, vwretd->vwretd, vwretx->vwretx
  - Share code filters (shrcd) replaced with securitytype, securitysubtype, sharetype
 
 Thank you to Tobias Rodriguez del Pozo for his assistance in writing this code.
 
+https://wrds-www.wharton.upenn.edu/pages/get-data/center-research-security-prices-crsp/monthly-update/stock-version-2/monthly-stock-file/
 """
 
 from datetime import datetime
