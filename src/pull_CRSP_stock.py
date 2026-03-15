@@ -23,13 +23,9 @@ Thank you to Tobias Rodriguez del Pozo for his assistance in writing this code.
 https://wrds-www.wharton.upenn.edu/pages/get-data/center-research-security-prices-crsp/monthly-update/stock-version-2/monthly-stock-file/
 """
 
-from datetime import datetime
 from pathlib import Path
-
-import pandas as pd
 import wrds
-from dateutil.relativedelta import relativedelta
-from pandas.tseries.offsets import MonthEnd
+
 
 from settings import config
 
@@ -38,10 +34,6 @@ WRDS_USERNAME = config("WRDS_USERNAME")
 START_DATE = config("START_DATE")
 END_DATE = config("END_DATE")
 
-
-from datetime import datetime
-import wrds
-import pandas as pd
 
 
 def pull_CRSP_monthly_file(
@@ -95,20 +87,6 @@ def pull_CRSP_monthly_file(
     db.close()
 
     return df
-
-
-
-def load_CRSP_monthly_file(data_dir=DATA_DIR):
-    path = Path(data_dir) / "CRSP_monthly_stock_to_2007.parquet"
-    df = pd.read_parquet(path)
-    return df
-
-
-
-
-def _demo():
-    df_msf = load_CRSP_monthly_file(data_dir=DATA_DIR)
-
 
 if __name__ == "__main__":
     df_msf = pull_CRSP_monthly_file(start_date=START_DATE, end_date=END_DATE, wrds_username=WRDS_USERNAME)

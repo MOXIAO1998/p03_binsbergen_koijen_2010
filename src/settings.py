@@ -249,5 +249,90 @@ def create_directories():
     config("OUTPUT_DIR").mkdir(parents=True, exist_ok=True)
 
 
+## test expectations
+EXPECTATION_TABLE1 = {
+        "delta_d_M": {
+            "Mean": 0.0586,
+            "Median": 0.0558,
+            "Standard deviation": 0.1233,
+            "Maximum": 0.3699,
+            "Minimum": -0.2912,
+        },
+        "delta_d": {
+            "Mean": 0.0611,
+            "Median": 0.0540,
+            "Standard deviation": 0.0622,
+            "Maximum": 0.2616,
+            "Minimum": -0.0579,
+        },
+    }
+
+EXPECTATION_TABLE3 = {
+        "r_M": {
+            "Constant": 0.4539,
+            "SE(Constant)": 0.1537,
+            "Lagged log PD coefficient": -0.1023,
+            "SE(Lagged log PD)": 0.0449,
+            "R2": 0.0796,
+            "Adj. R2": 0.0643,
+        },
+        "r": {
+            "Constant": 0.4555,
+            "SE(Constant)": 0.1524,
+            "Lagged log PD coefficient": -0.1020,
+            "SE(Lagged log PD)": 0.0441,
+            "R2": 0.0820,
+            "Adj. R2": 0.0667,
+        },
+        "delta_d_M": {
+            "Constant": 0.1814,
+            "SE(Constant)": 0.1266,
+            "Lagged log PD coefficient": -0.0361,
+            "SE(Lagged log PD)": 0.0370,
+            "R2": 0.0156,
+            "Adj. R2": -0.0007,
+        },
+        "delta_d": {
+            "Constant": 0.1085,
+            "SE(Constant)": 0.0645,
+            "Lagged log PD coefficient": -0.0138,
+            "SE(Lagged log PD)": 0.0186,
+            "R2": 0.0090,
+            "Adj. R2": -0.0075,
+        },
+    }
+
+
+EXPECTATION_TABLE4 = {
+    "AR1": {
+        "Constant": 0.0605,
+        "SE(Constant)": 0.0127,
+        "AR(1)": -0.2214,
+        "SE(AR(1))": 0.1255,
+        "R2": 0.0501,
+        "Adj. R2": 0.0340,
+    },
+    "r_lag_only": {
+        "Constant": 0.1007,
+        "SE(Constant)": 0.0170,
+        "r_{t-1}": -0.3717,
+        "SE(r_{t-1})": 0.0904,
+        "R2": 0.2227,
+        "Adj. R2": 0.2095,
+    },
+    "ARMAX11_r_lag": {
+        "Constant": 0.0594,
+        "SE(Constant)": 0.0146,
+        "AR(1)": 0.5594,
+        "SE(AR(1))": 0.1517,
+        "MA(1)": -0.5688,
+        "SE(MA(1))": 0.2080,
+        "r_{t-1}": -0.3784,
+        "SE(r_{t-1})": 0.1250,
+        "R2": 0.2779,
+        "Adj. R2": 0.2406,
+    },
+}
+
 if __name__ == "__main__":
     create_directories()
