@@ -36,20 +36,20 @@ USER = Path("USER")
 def task_pull_CRSP_stock():
     return {
         'file_dep':[],
-        'actions': ['python src/pull_CRSP_stock_to_2007.py'],
-        'targets':['_data/CRSP_monthly_stock_to_2007.parquet']
+        'actions': ['python src/pull_CRSP_stock.py'],
+        'targets':['_data/CRSP_monthly_stock_44_to_07.parquet','_data/CRSP_monthly_stock_44_to_latest.parquet']
     }
 
 def task_pull_30_day_T_bill():
     return {
         'file_dep':[],
-        'actions': ['python src/pull_30_day_T_bill_to_2007.py'],
-        'targets':['_data/CRSP_30_day_T_bill_to_2007.parquet']
+        'actions': ['python src/pull_30_day_T_bill.py'],
+        'targets':['_data/CRSP_30_day_T_bill_44_to_07.parquet','_data/CRSP_30_day_T_bill_44_to_latest.parquet']
     }
 
 def task_generate_chart():
     return {
-        'file_dep':["_data/CRSP_monthly_stock_to_2007.parquet",'_data/CRSP_30_day_T_bill_to_2007.parquet'],
+        'file_dep':["_data/CRSP_monthly_stock_44_to_07.parquet",'_data/CRSP_30_day_T_bill_44_to_07.parquet'],
         'actions': ['python src/generate_chart.py'],
         'targets':['_output/crsp_market_returns.png','_output/crsp_30day_tbill.png','_output/excess_market_return.png']
     }

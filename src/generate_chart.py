@@ -19,13 +19,13 @@ DATA_DIR = config("DATA_DIR")
 
 
 def load_CRSP_monthly_stock_data(data_dir=DATA_DIR):
-    path = Path(data_dir) / "CRSP_monthly_stock_to_2007.parquet"
+    path = Path(data_dir) / "CRSP_monthly_stock_44_to_07.parquet"
     df = pd.read_parquet(path)
     return df
 
 
 def load_r30_day_T_bill(data_dir=DATA_DIR):
-    path = Path(data_dir) / "CRSP_30_day_T_bill_to_2007.parquet"
+    path = Path(data_dir) / "CRSP_30_day_T_bill_44_to_07.parquet"
     df = pd.read_parquet(path)
     return df
 
