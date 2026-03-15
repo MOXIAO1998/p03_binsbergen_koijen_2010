@@ -21,13 +21,8 @@ Key changes from SIZ to CIZ format:
 Thank you to Tobias Rodriguez del Pozo for his assistance in writing this code.
 """
 
-from datetime import datetime
 from pathlib import Path
-
-import pandas as pd
 import wrds
-from dateutil.relativedelta import relativedelta
-from pandas.tseries.offsets import MonthEnd
 
 from settings import config
 
@@ -35,11 +30,6 @@ DATA_DIR = Path(config("DATA_DIR"))
 WRDS_USERNAME = config("WRDS_USERNAME")
 START_DATE = config("START_DATE")
 END_DATE = config("END_DATE")
-
-
-from datetime import datetime
-import wrds
-import pandas as pd
 
 
 def pull_CRSP_SP500_file(
@@ -88,19 +78,6 @@ def pull_CRSP_SP500_file(
     db.close()
 
     return df
-
-
-
-def load_CRSP_SP500_file(data_dir=DATA_DIR):
-    path = Path(data_dir) / "CRSP_SP500_to_2007.parquet"
-    df = pd.read_parquet(path)
-    return df
-
-
-
-
-def _demo():
-    df_msf = load_CRSP_SP500_file(data_dir=DATA_DIR)
 
 
 if __name__ == "__main__":

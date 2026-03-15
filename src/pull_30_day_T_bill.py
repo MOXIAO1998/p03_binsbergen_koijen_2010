@@ -23,7 +23,6 @@ https://wrds-www.wharton.upenn.edu/data-dictionary/crsp_m_indexes/mcti/
 
 from pathlib import Path
 
-import pandas as pd
 import wrds
 
 
@@ -33,11 +32,6 @@ DATA_DIR = Path(config("DATA_DIR"))
 WRDS_USERNAME = config("WRDS_USERNAME")
 START_DATE = config("START_DATE")
 END_DATE = config("END_DATE")
-
-
-from datetime import datetime
-import wrds
-import pandas as pd
 
 
 def pull_30_day_T_bill(
@@ -57,40 +51,32 @@ def pull_30_day_T_bill(
     """
     if end_date is None:
         query = f"""
-        SELECT
-           mcti.caldt AS date,
-           mcti.t30ret AS t30ret
-        FROM crspm.mcti AS mcti
-        
-        WHERE
-            mcti.caldt >= '{start_date}'
-        ORDER BY mcti.caldt
-        """
+            SELECT
+            mcti.caldt AS date,
+            mcti.t30ret AS t30ret
+            FROM crspm.mcti AS mcti
+            
+            WHERE
+                mcti.caldt >= '{start_date}'
+            ORDER BY mcti.caldt
+            """
     else:
         query = f"""
-        SELECT
-           mcti.caldt AS date,
-           mcti.t30ret AS t30ret
-        FROM crspm.mcti AS mcti
-        
-        WHERE
-            mcti.caldt BETWEEN '{start_date}' AND '{end_date}'
-        ORDER BY mcti.caldt
-        """
+            SELECT
+            mcti.caldt AS date,
+            mcti.t30ret AS t30ret
+            FROM crspm.mcti AS mcti
+            
+            WHERE
+                mcti.caldt BETWEEN '{start_date}' AND '{end_date}'
+            ORDER BY mcti.caldt
+            """
 
     db = wrds.Connection(wrds_username=wrds_username)
     df = db.raw_sql(query, date_cols=["date"])
     db.close()
 
     return df
-
-
-
-def load_CRSP_30_day_T_bill(data_dir=DATA_DIR):
-    path = Path(data_dir) / "CRSP_30_day_T_bill_to_2007.parquet"
-    df = pd.read_parquet(path)
-    return df
-
 
 
 
