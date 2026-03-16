@@ -169,6 +169,8 @@ def replicate_figure1(annual, start_year=1946, end_year=2007):
 
     plt.tight_layout()
     plt.savefig(f"_output/figure1_{end_year}")
+    with open("_output/figure1_{end_year}.html", "w") as f:
+        f.write('<img src="figure1_{end_year}.png" width="900">')
 
 
 def run_ols(annual, y_col, pd_col, start_year=1946, end_year=2007):
