@@ -36,14 +36,14 @@ date_col = "date"
 chart_name = "Figure 1 (Sample ending in 2007)"
 short_description_chart = "Replication of Figure 1 using the original sample."
 dataframe_id = "replication_data"
-path_to_html_chart = "_output/figure1_2007.png"
+path_to_html_chart = "_output/figure1_2007.html"
 chart_docs_str = "Replication of predictive regression figure using the original sample ending in 2007."
 
 [charts.figure1_2024]
 chart_name = "Figure 1 (Updated sample through 2024)"
 short_description_chart = "Replication of Figure 1 with updated data."
 dataframe_id = "replication_data"
-path_to_html_chart = "_output/figure1_2024.png"
+path_to_html_chart = "_output/figure1_2024.html"
 chart_docs_str = "Replication extended to updated sample through 2024."
 
 # Documents
