@@ -8,7 +8,7 @@ Last updated: {sub-ref}`today`
 ```{toctree}
 :maxdepth: 1
 :caption: Notebooks 📖
-notebooks/PR/01_example_notebook_interactive
+
 ```
 
 
@@ -27,8 +27,7 @@ charts.md
 ```{toctree}
 :maxdepth: 1
 :caption: Pipeline Dataframes 📊
-dataframes/PR/crsp_30day_tbill.md
-dataframes/PR/crsp_market_returns.md
+dataframes/PR/replication_data.md
 ```
 
 
@@ -47,10 +46,10 @@ apidocs/index
 | Lead Pipeline Developer         | Moxiao Li & Yilun Cai             |
 | Contributors                    | Moxiao Li & Yilun Cai           |
 | Git Repo URL                    |                         |
-| Pipeline Web Page               | <a href="file://C:/Users/zcaha/p03_binsbergen_koijen_2010/present_value_approach/docs/index.html">Pipeline Web Page      |
-| Date of Last Code Update        | 2026-02-10 14:38:44           |
+| Pipeline Web Page               | <a href="file:///Users/moxiaoli/Desktop/Uchicago/2025 - 2026/Full-Stack Finance/p03_binsbergen_koijen_2010/docs/index.html">Pipeline Web Page      |
+| Date of Last Code Update        | 2026-03-16 00:37:13           |
 | OS Compatibility                |  |
-| Linked Dataframes               |  [PR:crsp_market_returns](./dataframes/PR/crsp_market_returns.md)<br>  [PR:crsp_30day_tbill](./dataframes/PR/crsp_30day_tbill.md)<br>  |
+| Linked Dataframes               |  [PR:replication_data](./dataframes/PR/replication_data.md)<br>  |
 
 
 

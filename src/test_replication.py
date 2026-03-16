@@ -14,9 +14,9 @@ from settings import (
     EXPECTATION_TABLE3,
     EXPECTATION_TABLE4
 )
-BASE_DIR = Path(__file__).resolve().parent.parent
-DATA_DIR = BASE_DIR / "_data"
-
+from settings import config
+DATA_DIR = Path(config("DATA_DIR"))
+OUTPUT_DIR = Path(config("OUTPUT_DIR"))
 
 def assert_nested_dict_close(
 actual: dict,
@@ -39,21 +39,21 @@ abs_tol: float = 1e-3,
 
 
 def test_dividend_growth_stats_matches_reference_table():
-    csv_path = DATA_DIR / "dividend_growth_stats.csv"
+    csv_path = OUTPUT_DIR / "dividend_growth_stats.csv"
     actual = data_loader_divident_growth_stats(csv_path)
 
     assert_nested_dict_close(actual=actual, expected=EXPECTATION_TABLE1, rel_tol=0.1, abs_tol=1e-3)
 
 
 def test_ols_predictive_regressions():
-    csv_path = DATA_DIR / "OLS_predictive_regressions.csv"
+    csv_path = OUTPUT_DIR / "OLS_predictive_regressions.csv"
     actual = data_loader_ols_predictive_regressions(csv_path)
     
     assert_nested_dict_close(actual=actual, expected=EXPECTATION_TABLE3, rel_tol=0.1, abs_tol=1e-3)
 
 
 def test_specs_for_market_reinvested_dividend_growth():
-    csv_path = DATA_DIR / "specs_for_market_reinvested_dividend_growth.csv"
+    csv_path = OUTPUT_DIR / "specs_for_market_reinvested_dividend_growth.csv"
     actual = data_loader_market_reinvested_dividend_growth(csv_path)
 
     assert_nested_dict_close(actual=actual, expected=EXPECTATION_TABLE4, rel_tol=0.3, abs_tol=2e-2)
