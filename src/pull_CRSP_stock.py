@@ -18,7 +18,6 @@ Key changes from SIZ to CIZ format:
  - Column names: date->mthcaldt, vwretd->vwretd, vwretx->vwretx
  - Share code filters (shrcd) replaced with securitytype, securitysubtype, sharetype
 
-Thank you to Tobias Rodriguez del Pozo for his assistance in writing this code.
 
 https://wrds-www.wharton.upenn.edu/pages/get-data/center-research-security-prices-crsp/monthly-update/stock-version-2/monthly-stock-file/
 """

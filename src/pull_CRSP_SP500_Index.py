@@ -18,7 +18,6 @@ Key changes from SIZ to CIZ format:
  - Column names: date->caldt, sprtrn->sprtrn, spindx->spindx
  - Share code filters (shrcd) replaced with securitytype, securitysubtype, sharetype
 
-Thank you to Tobias Rodriguez del Pozo for his assistance in writing this code.
 """
 
 from pathlib import Path
