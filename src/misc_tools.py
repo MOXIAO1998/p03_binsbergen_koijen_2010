@@ -4,9 +4,7 @@
 
 from pathlib import Path
 import pandas as pd
-from settings import (
-    EXPECTATION_TABLE1
-)
+
 
 
 ########################################################################################

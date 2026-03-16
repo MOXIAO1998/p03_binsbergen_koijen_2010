@@ -22,10 +22,7 @@ https://wrds-www.wharton.upenn.edu/data-dictionary/crsp_m_indexes/mcti/
 """
 
 from pathlib import Path
-
 import wrds
-
-
 from settings import config
 
 DATA_DIR = Path(config("DATA_DIR"))
