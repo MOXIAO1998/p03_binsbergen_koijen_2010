@@ -1,9 +1,14 @@
-wrds
 pandas
 numpy
 matplotlib
 statsmodels
 scipy
-pytest
+wrds
 python-decouple
 pyarrow
+pytest
+jupyter
+nbconvert
+nbformat
+ipykernel
+pandoc

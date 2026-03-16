@@ -59,20 +59,25 @@ The entire pipeline can be executed automatically using **PyDoit**.
 
 ## Quick start
 
-### 1. Install LaTeX
+### 1. Set up Environment
 
-You must install a LaTeX distribution such as **TeX Live** or **MacTeX**.
+```bash
+pip install -r requirements.txt
+```
+if you did not install pip, please run:
+```bash
+conda install pip
+```
 
-Mac:
-https://tug.org/mactex/
-
-Windows:
-https://tug.org/texlive/windows.html
 
 ---
 
-### 2. Create a Python environment
+### 2. dodo.py
 
 ```bash
-python -m venv .venv
-source .venv/bin/activate
+doit
+```
+
+### 3. report 
+
+In reports, there are two tex files. These are latex files of report of the project you can review them and generate PDF files by them.
