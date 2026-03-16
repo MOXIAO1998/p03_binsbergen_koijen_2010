@@ -89,4 +89,3 @@ def task_ipynb_to_tex():
         ]
     }
 
-

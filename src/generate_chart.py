@@ -2,7 +2,7 @@
     generate chart and table of replication
 
 """
-
+import base64
 import pandas as pd
 import numpy as np
 import math
@@ -168,9 +168,20 @@ def replicate_figure1(annual, start_year=1946, end_year=2007):
     )
 
     plt.tight_layout()
-    plt.savefig(f"_output/figure1_{end_year}")
-    with open("_output/figure1_{end_year}.html", "w") as f:
-        f.write('<img src="figure1_{end_year}.png" width="900">')
+    plt.savefig(f"_output/figure1_{end_year}.png")
+
+
+    png_path = f"_output/figure1_{end_year}.png"
+
+    with open(png_path, "rb") as img:
+        encoded = base64.b64encode(img.read()).decode()
+
+    html = f"""
+    <img src="data:image/png;base64,{encoded}" style="width:100%;">
+    """
+
+    with open(f"_output/figure1_{end_year}.html", "w") as f:
+        f.write(html)
 
 
 def run_ols(annual, y_col, pd_col, start_year=1946, end_year=2007):
