@@ -1,5 +1,5 @@
 ---
-date: 2026-03-16 00:37:13
+date: 2026-03-16 12:28:00
 tags: Replication
 category: 
 ---
@@ -65,7 +65,7 @@ Replication of predictive regression figure using the original sample ending in 
 | Contributors                    | Moxiao Li & Yilun Cai           |
 | Git Repo URL                    |                         |
 | Pipeline Web Page               | <a href="file:///Users/moxiaoli/Desktop/Uchicago/2025 - 2026/Full-Stack Finance/p03_binsbergen_koijen_2010/docs/index.html">Pipeline Web Page      |
-| Date of Last Code Update        | 2026-03-16 00:37:13           |
+| Date of Last Code Update        | 2026-03-16 12:28:00           |
 | OS Compatibility                |  |
 | Linked Dataframes               |  [PR:replication_data](../dataframes/PR/replication_data.md)<br>  |
 
