@@ -19,10 +19,8 @@ runs_on_grid_or_windows_or_other = "Windows/Linux/MacOS"
 git_repo_URL = ""
 README_file_path = "./README.md"
 
-# 必须存在
 [notebooks]
 
-# 必须存在
 [dataframes.replication_data]
 data_sources = ["Replication"]
 data_providers = ["Local"]

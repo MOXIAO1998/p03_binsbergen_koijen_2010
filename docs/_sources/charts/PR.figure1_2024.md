@@ -1,5 +1,5 @@
 ---
-date: 2026-03-16 12:56:07
+date: 2026-03-16 13:22:51
 tags: Replication
 category: 
 ---
@@ -65,7 +65,7 @@ Replication extended to updated sample through 2024.
 | Contributors                    | Moxiao Li & Yilun Cai           |
 | Git Repo URL                    |                         |
 | Pipeline Web Page               | <a href="file:///Users/moxiaoli/Desktop/Uchicago/2025 - 2026/p03_binsbergen_koijen_2010/docs/index.html">Pipeline Web Page      |
-| Date of Last Code Update        | 2026-03-16 12:56:07           |
+| Date of Last Code Update        | 2026-03-16 13:22:51           |
 | OS Compatibility                |  |
 | Linked Dataframes               |  [PR:replication_data](../dataframes/PR/replication_data.md)<br>  |
 
